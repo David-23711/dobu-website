@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoBu Martial Arts | Home</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS Variables */
+        :root {
+            --primary-color: #c41e3a;
+            --secondary-color: #1a1a1a;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-color: #ddd;
+            --hover-color: #a01728;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            padding: 20px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 600px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/hero-section.png') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--hover-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--secondary-color);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--light-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Why Choose Section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .why-item {
+            text-align: center;
+        }
+
+        .why-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            background: var(--light-bg);
+        }
+
+        .schedule-table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .schedule-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Instructors Section */
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .instructor-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .instructor-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .instructor-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .instructor-info h3 {
+            margin-bottom: 5px;
+        }
+
+        .instructor-info p {
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer h4 {
+            margin-bottom: 20px;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .features-grid,
+            .why-grid,
+            .instructors-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>DoBu Martial Arts</h1>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="classes.html">Classes</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transform Your Body & Mind</h1>
+            <p>Expert Martial Arts Training in London</p>
+            <a href="classes.html" class="btn btn-primary">View Classes</a>
+            <a href="contact.html" class="btn btn-secondary">Join Today</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose DoBu?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🥋</div>
+                    <h3>4 Martial Arts</h3>
+                    <p>Jiu-Jitsu, Karate, Judo, and Muay Thai classes available for all levels</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Expert Instructors</h3>
+                    <p>Learn from black belt coaches with decades of experience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Pro Facilities</h3>
+                    <p>Modern gym, matted areas, sauna, and changing rooms</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">What You'll Achieve</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <img src="images/self-defense.png" alt="Learn Self-Defense" class="why-image">
+                    <h3>Learn Self-Defense</h3>
+                    <p>Gain practical skills to protect yourself</p>
+                </div>
+                <div class="why-item">
+                    <img src="images/build-confidence.png" alt="Build Confidence" class="why-image">
+                    <h3>Build Confidence</h3>
+                    <p>Develop mental strength and discipline</p>
+                </div>
+                <div class="why-item">
+                    <img src="images/get-fit.png" alt="Get Fit" class="why-image">
+                    <h3>Get Fit</h3>
+                    <p>Transform your body with intense workouts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="section-title">This Week's Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>06:00</td>
+                        <td>Jiu-Jitsu</td>
+                        <td>Karate</td>
+                        <td>Jiu-Jitsu</td>
+                        <td>Karate</td>
+                        <td>Jiu-Jitsu</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td>Judo</td>
+                        <td>Muay Thai</td>
+                        <td>Judo</td>
+                        <td>Muay Thai</td>
+                        <td>Judo</td>
+                    </tr>
+                    <tr>
+                        <td>18:00</td>
+                        <td>Karate</td>
+                        <td>Jiu-Jitsu</td>
+                        <td>Muay Thai</td>
+                        <td>Jiu-Jitsu</td>
+                        <td>Karate</td>
+                    </tr>
+                    <tr>
+                        <td>20:00</td>
+                        <td>Muay Thai</td>
+                        <td>Judo</td>
+                        <td>Karate</td>
+                        <td>Judo</td>
+                        <td>Muay Thai</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="classes.html" class="btn btn-primary">View Full Schedule</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Meet Our Instructors</h2>
+            <div class="instructors-grid">
+                <div class="instructor-card">
+                    <img src="images/head-coach.webp" alt="Instructor Photo" class="instructor-image">
+                    <div class="instructor-info">
+                        <h3>Mauricio Gomez</h3>
+                        <p>Head Coach</p>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <img src="images/head-coach.webp" alt="Instructor Photo" class="instructor-image">
+                    <div class="instructor-info">
+                        <h3>Sarah Nova</h3>
+                        <p>Karate Expert</p>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <img src="images/head-coach.webp" alt="Instructor Photo" class="instructor-image">
+                    <div class="instructor-info">
+                        <h3>Guy Victory</h3>
+                        <p>Jiu-Jitsu Coach</p>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <img src="images/head-coach.webp" alt="Instructor Photo" class="instructor-image">
+                    <div class="instructor-info">
+                        <h3>Morris Davis</h3>
+                        <p>Muay Thai Coach</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="classes.html">Classes</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>123 Fitness Street</li>
+                        <li>London, UK SW1A 1AA</li>
+                        <li>Phone: 020 1234 5678</li>
+                        <li>Email: info@dobumartialaarts.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Monday - Friday</li>
+                        <li>6:00 AM - 9:00 PM</li>
+                        <li>Saturday - Sunday</li>
+                        <li>8:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 DoBu Martial Arts. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Mobile Menu Toggle
+            $('.mobile-menu-toggle').click(function() {
+                $('.nav-menu').toggleClass('active');
+            });
+
+            // Close menu when link clicked
+            $('.nav-menu a').click(function() {
+                $('.nav-menu').removeClass('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | DoBu Martial Arts</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-color: #c41e3a; --secondary-color: #1a1a1a; --text-color: #333; --light-bg: #f8f9fa; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: var(--text-color); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        .header { background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .navbar { padding: 20px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { color: var(--primary-color); font-size: 28px; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { color: var(--text-color); text-decoration: none; font-weight: 500; }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--primary-color); }
+        .mobile-menu-toggle { display: none; flex-direction: column; background: none; border: none; cursor: pointer; }
+        .mobile-menu-toggle span { width: 25px; height: 3px; background: var(--secondary-color); margin: 3px 0; }
+        
+        /* Hero */
+        .page-hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/contact-hero-section.png') no-repeat center center/cover; padding: 80px 0; text-align: center; color: white; }
+        .page-hero h1 { font-size: 48px; margin-bottom: 10px; }
+        
+        /* Contact Section */
+        section { padding: 60px 0; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .section-title { font-size: 28px; margin-bottom: 30px; }
+        
+        /* Form */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-control { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px; }
+        .form-control:focus { outline: none; border-color: var(--primary-color); }
+        textarea.form-control { min-height: 120px; resize: vertical; }
+        .btn { display: block; width: 100%; padding: 15px; background: var(--primary-color); color: white; border: none; border-radius: 4px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        .btn:hover { background: #a01728; }
+        .success-message { display: none; background: #d4edda; color: #155724; padding: 20px; border-radius: 4px; margin-top: 20px; text-align: center; }
+        
+        /* Contact Info */
+        .info-item { display: flex; gap: 20px; margin-bottom: 30px; padding: 20px; background: var(--light-bg); border-radius: 8px; }
+        .info-icon { font-size: 32px; min-width: 50px; }
+        .info-content h3 { font-size: 18px; margin-bottom: 10px; }
+        .info-content p { color: #666; }
+        .info-content a { color: var(--primary-color); text-decoration: none; }
+        
+        .map-section {
+            background: var(--light-bg);
+        }
+
+        .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: 400px; /* Fixed height for the map */
+            margin: 0 auto;
+        }
+
+        .map-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Footer */
+        .footer { background: var(--secondary-color); color: white; padding: 60px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px; }
+        .footer h4 { margin-bottom: 20px; }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer a { color: #ccc; text-decoration: none; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #444; }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle { display: flex; }
+            .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; }
+            .nav-menu.active { display: flex; }
+            .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo"><h1>DoBu Martial Arts</h1></div>
+                <button class="mobile-menu-toggle"><span></span><span></span><span></span></button>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="classes.html">Classes</a></li>
+                    <li><a href="membership.html">Membership</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1>Get In Touch</h1>
+        <p>Start Your Martial Arts Journey Today</p>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="section-title">Send Us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                    <div class="success-message" id="successMessage">
+                        <h3>✓ Message Sent Successfully!</h3>
+                        <p>We'll get back to you within 24 hours.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h2 class="section-title">Contact Information</h2>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Address</h3>
+                            <p>123 Fitness Street<br>London, UK SW1A 1AA</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <p><a href="tel:02012345678">020 1234 5678</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@dobumartialaarts.com">info@dobumartialaarts.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-content">
+                            <h3>Opening Hours</h3>
+                            <p>Monday - Friday: 6:00 AM - 9:00 PM<br>Saturday - Sunday: 8:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">Find Us on the Map</h2>
+            <div class="map-container">
+                <img src="images/map.jpg" alt="Our Location on Map" class="map-image">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="classes.html">Classes</a></li><li><a href="membership.html">Membership</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div><h4>Contact</h4><ul><li>123 Fitness Street</li><li>London, UK SW1A 1AA</li><li>Phone: 020 1234 5678</li><li>Email: info@dobumartialaarts.com</li></ul></div>
+                <div><h4>Opening Hours</h4><ul><li>Monday - Friday: 6 AM - 9 PM</li><li>Saturday - Sunday: 8 AM - 6 PM</li></ul></div>
+                <div><h4>Follow Us</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Twitter</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 DoBu Martial Arts. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $('.mobile-menu-toggle').click(function() { $('.nav-menu').toggleClass('active'); });
+            
+            $('#contactForm').submit(function(e) {
+                e.preventDefault();
+                $('#successMessage').fadeIn();
+                this.reset();
+                setTimeout(function() {
+                    $('#successMessage').fadeOut();
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

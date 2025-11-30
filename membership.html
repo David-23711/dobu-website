@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership | DoBu Martial Arts</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-color: #c41e3a; --secondary-color: #1a1a1a; --text-color: #333; --light-bg: #f8f9fa; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: var(--text-color); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        .header { background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .navbar { padding: 20px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { color: var(--primary-color); font-size: 28px; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { color: var(--text-color); text-decoration: none; font-weight: 500; }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--primary-color); }
+        .mobile-menu-toggle { display: none; flex-direction: column; background: none; border: none; cursor: pointer; }
+        .mobile-menu-toggle span { width: 25px; height: 3px; background: var(--secondary-color); margin: 3px 0; }
+        
+        /* Hero */
+        .page-hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/membership-hero-section.png') no-repeat center center/cover; padding: 80px 0; text-align: center; color: white; }
+        .page-hero h1 { font-size: 48px; margin-bottom: 10px; }
+        
+        /* Pricing */
+        section { padding: 60px 0; }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 40px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+        .pricing-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s; }
+        .pricing-card:hover { transform: translateY(-10px); }
+        .pricing-card.featured { border: 3px solid var(--primary-color); }
+        .price { font-size: 48px; font-weight: bold; color: var(--primary-color); margin: 20px 0; }
+        .price span { font-size: 18px; color: #666; }
+        .pricing-card ul { list-style: none; margin: 20px 0; }
+        .pricing-card li { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .btn { display: inline-block; padding: 12px 30px; background: var(--primary-color); color: white; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
+        .btn:hover { background: #a01728; }
+        
+        .info-section {
+            padding: 60px 0;
+        }
+        .info-box {
+            background: var(--light-bg);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .info-box li {
+            font-size: 18px;
+            padding: 10px 0;
+        }
+
+        /* FAQ */
+        .faq-section { background: var(--light-bg); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: white; margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question h3 { font-size: 18px; }
+        .faq-toggle { font-size: 24px; font-weight: bold; color: var(--primary-color); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+        .faq-item.active .faq-answer { max-height: 300px; }
+        .faq-answer p { padding: 0 20px 20px; color: #666; }
+        
+        /* Footer */
+        .footer { background: var(--secondary-color); color: white; padding: 60px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 40px; }
+        .footer h4 { margin-bottom: 20px; }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer a { color: #ccc; text-decoration: none; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #444; }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle { display: flex; }
+            .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; }
+            .nav-menu.active { display: flex; }
+            .pricing-grid, .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo"><h1>DoBu Martial Arts</h1></div>
+                <button class="mobile-menu-toggle"><span></span><span></span><span></span></button>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="classes.html">Classes</a></li>
+                    <li><a href="membership.html" class="active">Membership</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1>Membership Options</h1>
+        <p>Choose the Package That Fits You</p>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">£25<span>/month</span></div>
+                    <ul>
+                        <li>✓ 2 sessions per week</li>
+                        <li>✓ 1 martial art</li>
+                        <li>✓ Gym access</li>
+                        <li>✓ Sauna access</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Intermediate</h3>
+                    <div class="price">£35<span>/month</span></div>
+                    <ul>
+                        <li>✓ 3 sessions per week</li>
+                        <li>✓ 1 martial art</li>
+                        <li>✓ Gym access</li>
+                        <li>✓ Sauna access</li>
+                        <li>✓ 10% discount on private tuition</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Advanced</h3>
+                    <div class="price">£45<span>/month</span></div>
+                    <ul>
+                        <li>✓ 5 sessions per week</li>
+                        <li>✓ 2 martial arts</li>
+                        <li>✓ Gym & sauna access</li>
+                        <li>✓ 15% discount on private tuition</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Elite</h3>
+                    <div class="price">£60<span>/month</span></div>
+                    <ul>
+                        <li>✓ Unlimited classes</li>
+                        <li>✓ All martial arts</li>
+                        <li>✓ Full facilities access</li>
+                        <li>✓ 1 private session/month</li>
+                        <li>✓ Priority booking</li>
+                    </ul>
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <h2 class="section-title">Special Memberships</h2>
+            <div class="info-box">
+                <ul>
+                    <li>Private Martial Arts Tuition: £15/hour</li>
+                    <li>Junior Membership (Kids): £25/month</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" style="background-color: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title">What's Included in All Plans</h2>
+            <div class="info-box" style="background-color: white;">
+                <ul>
+                    <li>✓ Professional instruction from black belt coaches</li>
+                    <li>✓ Access to matted martial arts training area</li>
+                    <li>✓ Use of fully-equipped gym facilities</li>
+                    <li>✓ Sauna and steam room access</li>
+                    <li>✓ Clean changing and shower facilities</li>
+                    <li>✓ No joining fee - Cancel anytime with 30 days notice</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I try a class before joining?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We offer a free trial class for all new members. Simply contact us to schedule your free trial.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What do I need to bring to class?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For your first class, just wear comfortable athletic clothing. Once you join, you'll need a gi (uniform) which can be purchased at the gym.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer student discounts?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer a 15% discount for full-time students with valid student ID.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is there a contract period?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No long-term contracts! All memberships are month-to-month with no joining fee. Cancel anytime with 30 days notice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="classes.html">Classes</a></li><li><a href="membership.html">Membership</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div><h4>Contact</h4><ul><li>123 Fitness Street</li><li>London, UK SW1A 1AA</li><li>Phone: 020 1234 5678</li><li>Email: info@dobumartialaarts.com</li></ul></div>
+                <div><h4>Opening Hours</h4><ul><li>Monday - Friday: 6 AM - 9 PM</li><li>Saturday - Sunday: 8 AM - 6 PM</li></ul></div>
+                <div><h4>Follow Us</h4><ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Twitter</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 DoBu Martial Arts. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $('.mobile-menu-toggle').click(function() { $('.nav-menu').toggleClass('active'); });
+            $('.faq-question').click(function() {
+                $(this).parent().toggleClass('active');
+                $('.faq-item').not($(this).parent()).removeClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
